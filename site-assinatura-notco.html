@@ -1,0 +1,226 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="2575.6">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; min-height: 14.0px}
+  </style>
+</head>
+<body>
+<p class="p1">&lt;!DOCTYPE html&gt;</p>
+<p class="p1">&lt;html lang="pt-br"&gt;</p>
+<p class="p1">&lt;head&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;meta charset="UTF-8"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;title&gt;Gerador de Assinatura de Email&lt;/title&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;!-- Incluindo Tailwind CSS para estilização --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;script src="https://cdn.tailwindcss.com"&gt;&lt;/script&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;!-- Incluindo a biblioteca html2canvas para capturar a assinatura como imagem --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"&gt;&lt;/script&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;link rel="preconnect" href="https://fonts.googleapis.com"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;link rel="preconnect" href="https://fonts.gstatic.com" crossorigin&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;style&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>/* Estilo para a fonte Inter */</p>
+<p class="p1"><span class="Apple-converted-space">        </span>body {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>font-family: 'Inter', sans-serif;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>/* Evita que o contorno do foco apareça ao clicar no botão de download */</p>
+<p class="p1"><span class="Apple-converted-space">        </span>#downloadBtn:focus {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>outline: none;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>box-shadow: none;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>/* Estilos para a galeria de logos */</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.gallery-logo {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>cursor: pointer;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>border: 3px solid transparent;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>border-radius: 50%;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>transition: border-color 0.2s ease-in-out;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.gallery-logo:hover {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>border-color: #a5b4fc; /* indigo-300 */</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.gallery-logo.selected {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>border-color: #6366f1; /* indigo-500 */</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/style&gt;</p>
+<p class="p1">&lt;/head&gt;</p>
+<p class="p1">&lt;body class="bg-gray-100 flex items-center justify-center min-h-screen p-4"&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="w-full max-w-4xl mx-auto bg-white rounded-xl shadow-lg p-6 md:p-8"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="grid md:grid-cols-2 gap-8 md:gap-12"&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;!-- Seção de Formulário --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;div class="flex flex-col"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;h1 class="text-2xl md:text-3xl font-bold text-gray-800 mb-2"&gt;Gerador de Assinatura&lt;/h1&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;p class="text-gray-500 mb-6"&gt;Preencha os campos e escolha uma imagem para criar sua assinatura.&lt;/p&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;div class="space-y-4"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;label for="nome" class="block text-sm font-medium text-gray-700"&gt;Nome Completo&lt;/label&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;input type="text" id="nome" onkeyup="updateSignature()" class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500" placeholder="Seu Nome"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;label for="email" class="block text-sm font-medium text-gray-700"&gt;Email&lt;/label&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;input type="email" id="email" onkeyup="updateSignature()" class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500" placeholder="seu.email@exemplo.com"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;label for="telefone" class="block text-sm font-medium text-gray-700"&gt;Telefone&lt;/label&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;input type="tel" id="telefone" onkeyup="updateSignature()" class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500" placeholder="+55 (11) 98765-4321"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;label for="cargo" class="block text-sm font-medium text-gray-700"&gt;Cargo&lt;/label&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;input type="text" id="cargo" onkeyup="updateSignature()" class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500" placeholder="Sua Posição na Empresa"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;label for="pais" class="block text-sm font-medium text-gray-700"&gt;País&lt;/label&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;input type="text" id="pais" onkeyup="updateSignature()" class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500" placeholder="Seu País"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;!-- NOVA GALERIA DE IMAGENS --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;label class="block text-sm font-medium text-gray-700"&gt;Escolha um Logo&lt;/label&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;div id="logo-gallery" class="mt-2 grid grid-cols-4 sm:grid-cols-5 gap-3"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;!-- Imagens da galeria serão inseridas aqui pelo JavaScript --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;!-- Seção de Pré-visualização e Download --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;div class="flex flex-col"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;h2 class="text-xl font-bold text-gray-800 mb-4"&gt;Pré-visualização&lt;/h2&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;div id="signature-preview-container" class="bg-gray-50 p-6 rounded-lg border border-dashed border-gray-300 flex-grow"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;div id="signature-preview" class="w-full"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;table cellpadding="0" cellspacing="0" style="border-collapse: collapse; font-family: Arial, sans-serif; color: #333;"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;tr&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>&lt;td style="border-right: 2px solid #4f46e5; padding-right: 12px; vertical-align: top;"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                    </span>&lt;img id="preview-logo" src="" alt="Logo" style="width: 80px; height: 80px; border-radius: 50%;"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>&lt;/td&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>&lt;td style="padding-left: 12px; vertical-align: top;"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                    </span>&lt;p id="preview-nome" style="font-size: 16px; font-weight: bold; margin: 0 0 4px 0; color: #111827;"&gt;Seu Nome&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                    </span>&lt;p id="preview-cargo" style="font-size: 14px; margin: 0 0 10px 0; color: #4b5563;"&gt;Seu Cargo&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                    </span>&lt;p style="font-size: 13px; margin: 0 0 4px 0;"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                        </span>&lt;strong style="color: #4f46e5;"&gt;E:&lt;/strong&gt; &lt;span id="preview-email"&gt;seu.email@exemplo.com&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                    </span>&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                    </span>&lt;p style="font-size: 13px; margin: 0 0 4px 0;"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                        </span>&lt;strong style="color: #4f46e5;"&gt;T:&lt;/strong&gt; &lt;span id="preview-telefone"&gt;+55 (00) 00000-0000&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                    </span>&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                    </span>&lt;p style="font-size: 13px; margin: 0;"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                        </span>&lt;strong style="color: #4f46e5;"&gt;País:&lt;/strong&gt; &lt;span id="preview-pais"&gt;Seu País&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                    </span>&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>&lt;/td&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;/tr&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;/table&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;button id="downloadBtn" class="mt-6 w-full bg-indigo-600 text-white font-bold py-3 px-4 rounded-lg hover:bg-indigo-700 transition duration-300 ease-in-out shadow-md"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>Fazer Download da Assinatura (PNG)</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;script&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>// --- "Banco de Dados" de Imagens ---</p>
+<p class="p1"><span class="Apple-converted-space">        </span>// Adicione ou remova os links das imagens que você quer oferecer.</p>
+<p class="p1"><span class="Apple-converted-space">        </span>const imageDatabase = [</p>
+<p class="p1"><span class="Apple-converted-space">            </span>'https://placehold.co/80x80/6366f1/ffffff?text=L1',</p>
+<p class="p1"><span class="Apple-converted-space">            </span>'https://placehold.co/80x80/ec4899/ffffff?text=L2',</p>
+<p class="p1"><span class="Apple-converted-space">            </span>'https://placehold.co/80x80/22c55e/ffffff?text=L3',</p>
+<p class="p1"><span class="Apple-converted-space">            </span>'https://placehold.co/80x80/f97316/ffffff?text=L4',</p>
+<p class="p1"><span class="Apple-converted-space">            </span>'https://placehold.co/80x80/14b8a6/ffffff?text=L5'</p>
+<p class="p1"><span class="Apple-converted-space">        </span>];</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>const gallery = document.getElementById('logo-gallery');</p>
+<p class="p1"><span class="Apple-converted-space">        </span>const previewLogo = document.getElementById('preview-logo');</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>// Popula a galeria com as imagens do "banco de dados"</p>
+<p class="p1"><span class="Apple-converted-space">        </span>imageDatabase.forEach((url, index) =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const img = document.createElement('img');</p>
+<p class="p1"><span class="Apple-converted-space">            </span>img.src = url;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>img.alt = `Logo ${index + 1}`;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>img.classList.add('gallery-logo', 'w-16', 'h-16');</p>
+<p class="p2"><span class="Apple-converted-space">            </span></p>
+<p class="p1"><span class="Apple-converted-space">            </span>// Seleciona a primeira imagem por padrão</p>
+<p class="p1"><span class="Apple-converted-space">            </span>if (index === 0) {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>img.classList.add('selected');</p>
+<p class="p1"><span class="Apple-converted-space">                </span>previewLogo.src = url;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>gallery.appendChild(img);</p>
+<p class="p1"><span class="Apple-converted-space">        </span>});</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>// Adiciona um listener de clique na galeria</p>
+<p class="p1"><span class="Apple-converted-space">        </span>gallery.addEventListener('click', function(event) {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>// Verifica se o clique foi em uma imagem da galeria</p>
+<p class="p1"><span class="Apple-converted-space">            </span>if (event.target.tagName === 'IMG') {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>// Remove a seleção de todas as outras imagens</p>
+<p class="p1"><span class="Apple-converted-space">                </span>gallery.querySelectorAll('.gallery-logo').forEach(img =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>img.classList.remove('selected');</p>
+<p class="p1"><span class="Apple-converted-space">                </span>});</p>
+<p class="p2"><span class="Apple-converted-space">                </span></p>
+<p class="p1"><span class="Apple-converted-space">                </span>// Adiciona a classe 'selected' à imagem clicada</p>
+<p class="p1"><span class="Apple-converted-space">                </span>const selectedImg = event.target;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>selectedImg.classList.add('selected');</p>
+<p class="p2"><span class="Apple-converted-space">                </span></p>
+<p class="p1"><span class="Apple-converted-space">                </span>// Atualiza a imagem na pré-visualização</p>
+<p class="p1"><span class="Apple-converted-space">                </span>previewLogo.src = selectedImg.src;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>});</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>// Função para atualizar a pré-visualização da assinatura em tempo real</p>
+<p class="p1"><span class="Apple-converted-space">        </span>function updateSignature() {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const nome = document.getElementById('nome').value || 'Seu Nome';</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const email = document.getElementById('email').value || 'seu.email@exemplo.com';</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const telefone = document.getElementById('telefone').value || '+55 (00) 00000-0000';</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const cargo = document.getElementById('cargo').value || 'Seu Cargo';</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const pais = document.getElementById('pais').value || 'Seu País';</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>document.getElementById('preview-nome').innerText = nome;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>document.getElementById('preview-email').innerText = email;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>document.getElementById('preview-telefone').innerText = telefone;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>document.getElementById('preview-cargo').innerText = cargo;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>document.getElementById('preview-pais').innerText = pais;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>// Adiciona um listener ao botão de download</p>
+<p class="p1"><span class="Apple-converted-space">        </span>document.getElementById('downloadBtn').addEventListener('click', function() {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const signatureElement = document.getElementById('signature-preview');</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const downloadButton = this;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>downloadButton.innerText = 'Gerando imagem...';</p>
+<p class="p1"><span class="Apple-converted-space">            </span>downloadButton.disabled = true;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>html2canvas(signatureElement, {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>backgroundColor: null, // Fundo transparente</p>
+<p class="p1"><span class="Apple-converted-space">                </span>scale: 2, // Aumenta a escala para melhor qualidade de imagem</p>
+<p class="p1"><span class="Apple-converted-space">                </span>useCORS: true // Necessário para carregar imagens de outros domínios no canvas</p>
+<p class="p1"><span class="Apple-converted-space">            </span>}).then(canvas =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>const link = document.createElement('a');</p>
+<p class="p1"><span class="Apple-converted-space">                </span>link.download = 'assinatura.png';</p>
+<p class="p1"><span class="Apple-converted-space">                </span>link.href = canvas.toDataURL('image/png');</p>
+<p class="p1"><span class="Apple-converted-space">                </span>link.click();</p>
+<p class="p1"><span class="Apple-converted-space">                </span>downloadButton.innerText = 'Fazer Download da Assinatura (PNG)';</p>
+<p class="p1"><span class="Apple-converted-space">                </span>downloadButton.disabled = false;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>}).catch(err =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>console.error('Ocorreu um erro ao gerar a imagem:', err);</p>
+<p class="p1"><span class="Apple-converted-space">                </span>alert('Não foi possível gerar a imagem. Tente novamente.');</p>
+<p class="p1"><span class="Apple-converted-space">                </span>downloadButton.innerText = 'Fazer Download da Assinatura (PNG)';</p>
+<p class="p1"><span class="Apple-converted-space">                </span>downloadButton.disabled = false;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>});</p>
+<p class="p1"><span class="Apple-converted-space">        </span>});</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>// Chama a função uma vez no início para garantir que a pré-visualização não esteja vazia</p>
+<p class="p1"><span class="Apple-converted-space">        </span>updateSignature();</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/script&gt;</p>
+<p class="p1">&lt;/body&gt;</p>
+<p class="p1">&lt;/html&gt;</p>
+</body>
+</html>
